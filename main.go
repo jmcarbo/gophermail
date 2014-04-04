@@ -270,7 +270,7 @@ func (m *Message) Bytes() ([]byte, error) {
 			header.Add("Content-Type", contentType)
 			header.Add("Content-Disposition", fmt.Sprintf(`inline;%s filename="%s"`, crlf, attachment.Name))
 			header.Add("Content-Transfer-Encoding", "base64")
-			header.Add("Content-ID", fmt.Sprintf("%s@attachment.info"))
+			header.Add("Content-ID", fmt.Sprintf("%s@attachment.info", attachment.Name))
 			attachment.Header = header
 			
 			attachmentPart, err := mixedw.CreatePart(header)
