@@ -266,7 +266,7 @@ func (m *Message) Bytes() ([]byte, error) {
 
 			header := textproto.MIMEHeader{}
 			header.Add("Content-Type", contentType)
-			header.Add("Content-Disposition", fmt.Sprintf(`attachment;%s filename="%s"`, crlf, attachment.Name))
+			header.Add("Content-Disposition", fmt.Sprintf(`inline;%s filename="%s"`, crlf, attachment.Name))
 			header.Add("Content-Transfer-Encoding", "base64")
 
 			attachmentPart, err := mixedw.CreatePart(header)
