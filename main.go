@@ -115,6 +115,8 @@ type Attachment struct {
 	ContentType string
 
 	Data io.Reader
+	Header textproto.MIMEHeader
+
 }
 
 // Bytes gets the encoded MIME message.
@@ -268,7 +270,8 @@ func (m *Message) Bytes() ([]byte, error) {
 			header.Add("Content-Type", contentType)
 			header.Add("Content-Disposition", fmt.Sprintf(`inline;%s filename="%s"`, crlf, attachment.Name))
 			header.Add("Content-Transfer-Encoding", "base64")
-
+			attachment.Header = header
+			
 			attachmentPart, err := mixedw.CreatePart(header)
 			if err != nil {
 				return nil, err
